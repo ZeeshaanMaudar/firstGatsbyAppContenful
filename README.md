@@ -6,4 +6,4 @@ Technology: React.js, Styled Components, GraphQl, Contentful
 
 ## 💫 Live Site
 
-[![View Website]](https://firstgatsbyappcontentful.netlify.com)
+[View Website](https://firstgatsbyappcontentful.netlify.com)
