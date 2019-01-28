@@ -8,7 +8,7 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-styled-components`,
-    `gatsby-plugin-netlify-cms`,
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -31,12 +31,12 @@ module.exports = {
       },
     },
     {
-      "resolve": `gatsby-transformer-remark`,
-      "options": {
-        "excerpt_separator": `<!-- end -->`
-      }
-    },
-    
+      resolve: `gatsby-source-contentful`,
+      options: {
+        spaceId: `l2wqkfoti77k`,
+        accessToken: `18089c7fe738d4a8829e7906b1fba24a25b42a0e8e687395ead161b9e8d674f2`,
+      },
+    },    
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-remark`,

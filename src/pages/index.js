@@ -10,7 +10,7 @@ const IndexPage = ({ data }) => (
   <Layout>
     <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
     <h2>Posts</h2>
-    {data.allMarkdownRemark.edges.map(({ node }) => (
+    {data.allContentfulBlogPost.edges.map(({ node }) => (
       <PostListing key={node.id} post={node} />
     ))}
   </Layout>
@@ -26,22 +26,19 @@ export const query = graphql`
       description
     }
   }
-  allMarkdownRemark(sort: {
-    fields: [frontmatter___date],
-    order: DESC
-  }) {
+  allContentfulBlogPost {
     edges {
       node {
+        title
+        createdAt(formatString: "MMMM DD YYYY")
+        body {
+          childMarkdownRemark {
+            excerpt
+          }
         id
-        frontmatter {
-          title
-          date(formatString:"MMMM DD YYYY")
-        }
-        fields {
-          slug
-        }
-        html
-        excerpt(pruneLength: 280)
+      }
+        slug
+        id
       }
     }
   }

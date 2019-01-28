@@ -7,11 +7,11 @@ class PostPage extends Component {
     const { data, location } = this.props;
     return (
       <Layout location={location}>
-        <span>{data.markdownRemark.frontmatter.date}</span>
-        <h1>{data.markdownRemark.frontmatter.title}</h1>
-        <p>{data.markdownRemark.excerpt}</p>
+        <span>{data.contentfulBlogPost.createdAt}</span>
+        <h1>{data.contentfulBlogPost.title}</h1>
+        {/* <p>{data.contentfulBlogPost.childMarkdownRemark.excerpt}</p> */}
         <div dangerouslySetInnerHTML={{
-            __html: data.markdownRemark.html
+            __html: data.contentfulBlogPost.body.childMarkdownRemark.html
           }} />
       </Layout>
     );
@@ -22,17 +22,16 @@ export default PostPage;
 
 export const query = graphql`
   query BlogPostQuery($slug: String!) {
-    markdownRemark(fields: {
-      slug: {
-        eq: $slug
-      }
-    }) {
-      html
-      excerpt
-      frontmatter {
-        title
-        date(formatString:"MMMM DD YYYY")
-      }
+    contentfulBlogPost(slug: {eq: $slug}) {
+      createdAt(formatString: "MMMM DD YYYY")
+      title
+      body {
+        childMarkdownRemark {
+          html
+          excerpt
+        }
+      id
     }
   }
+}
 `
